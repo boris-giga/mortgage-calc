@@ -26,8 +26,9 @@ const countForTable = (totalCost=0, downPayment=0, interestRate=0, monthQuantity
       }
     ]    
   }
-  
+
   return res
 }
 
 module.exports = countForTable
+export default countForTable
