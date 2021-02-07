@@ -6,6 +6,7 @@ import './App.css'
 
 import BanksPage from './pages/BanksPage/BanksPage'
 import CalcPage from './pages/CalcPage/CalcPage'
+import AddPage from './pages/AddPage/AddPage';
 
 class App extends React.Component {
   constructor() {
@@ -42,6 +43,10 @@ class App extends React.Component {
             exact 
             path="/calc" 
             render={()=><CalcPage banks={banks}/>}          />
+          <Route 
+            exact 
+            path="/add" 
+            render={()=><AddPage banks={banks}/>}          />
         </Switch>
       </div>
     )

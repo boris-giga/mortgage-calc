@@ -1,4 +1,9 @@
 .App {
-  text-align: center;
+  text-align: inherit;
 }
 
+.formAdd {
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+}
