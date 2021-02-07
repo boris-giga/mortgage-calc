@@ -8,7 +8,7 @@ const BankCard = ({bank}) => {
       <Accordion>
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey={bank} className="d-flex justify-content-between">
-            <h4>{bank.displayName}</h4>
+            <h4>{bank.name}</h4>
             <p>{bank.interestRate}% річних</p>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={bank}>
