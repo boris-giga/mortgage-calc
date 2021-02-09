@@ -9,19 +9,19 @@ const CalcPage = ({ banks }) => {
 	const [totalCost, setTotalCost] = useState('');
 	const [downPayment, setDownPayment] = useState(0);
 	const [monthQuantity, setMonthQuantity] = useState(1);
-	
+
 	const getTotalMonthlyPayment = () => {
 		let res = countForTable(
 			totalCost,
 			downPayment,
 			currentBank.interestRate,
 			monthQuantity
-		)
-		if (res.length === 0) return 0
-		else return res[0].totalPayment.toFixed(2)
-	}
+		);
+		if (res.length === 0) return 0;
+		else return res[0].totalPayment.toFixed(2);
+	};
 
-	const totalMonthlyPayment = getTotalMonthlyPayment()
+	const totalMonthlyPayment = getTotalMonthlyPayment();
 
 	const getResForTable = () => {
 		let res = countForTable(
@@ -29,21 +29,18 @@ const CalcPage = ({ banks }) => {
 			downPayment,
 			currentBank.interestRate,
 			monthQuantity
-		)
-		return res
-	}
+		);
+		return res;
+	};
 
-	const tableData = getResForTable()
+	const tableData = getResForTable();
 
 	return (
-		
 		<div className='calcPage'>
-			<form 
-				className='form'
-			>
+			<form className='form'>
 				<label>Select your bank or start typing..</label>
 				<Select
-					className='select'   
+					className='select'
 					options={banks}
 					onChange={(e) => {
 						setCurrentBank(e);
@@ -90,17 +87,16 @@ const CalcPage = ({ banks }) => {
 					required={true}
 				/>
 			</form>
-			{(totalMonthlyPayment !== 0 && !isNaN(totalMonthlyPayment)) ? (
+			{totalMonthlyPayment !== 0 && !isNaN(totalMonthlyPayment) ? (
 				<input
 					type='submit'
 					disabled
 					value={`your total mothly payment will be ${totalMonthlyPayment}`}
 				/>
-				
 			) : (
 				<input type='err' value='input correct data' disabled />
 			)}
-			<Table data={tableData}/>
+			<Table data={tableData} />
 		</div>
 	);
 };

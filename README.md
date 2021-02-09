@@ -1,8 +1,27 @@
-Adding and removing banks works after refreshing page
+You can see application live at link https://react-mortgage-calc.herokuapp.com/calc
 
-# Getting Started with Create React App
+- Banks Page:
+  Features applied:
+    * fetches data from server with mySQL db (deployed on Heroku, github link https://github.com/boris-giga/mortgage-backend , docs in README.md)
+    * removes bank from db by clicking on Remove bank
+  Fixes needed:
+    * you can see changes after refreshing page
+- Add bank Page:
+  Features applied:
+    * adds bank to db after filling form and clicking on ADD BANK button
+  Fixes needed:
+    * you can see changes after refreshing page
+    * additional validation
+- Calculate page
+  Features applied:
+    * bank selection from dropdown (with typing)
+    * shows result of Total Monthly Payment according to filled inputs and interest rate of chosen bank
+    * shows table with Total payment, Interest payment, Loan balance and Equity regarding to each month of Loan term from input
+  Fixes needed:
+    * hide table if wrong results such as NaN etc
+    * fields validation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+** ALSO refactoring is needed (for example, breaking into smaller components)
 
 ## Available Scripts
 

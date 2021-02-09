@@ -17,7 +17,8 @@ const countForTable = (totalCost=0, downPayment=0, interestRate=0, monthQuantity
         'month': i,
         'totalPayment': totalPayment,
         'interestPayment': interestPayment,
-        'loanBalance': ( (loanBalance <= 0) ? 0 : loanBalance ),
+        // 'loanBalance': ( (loanBalance <= 0) ? 0 : loanBalance ),
+        'loanBalance': loanBalance,
         'equity': equity
       }
     ]    

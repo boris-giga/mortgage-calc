@@ -1,38 +1,22 @@
 import { Accordion, Card } from 'react-bootstrap';
-
-import './BankCard.css';
 import { withRouter } from 'react-router-dom';
 
-const BankCard = (props) => {
-  const {bank} = props
- 
-  const removeBank = (id) => {
-    
-    fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks/'+id, {
-      method: 'DELETE'
-    })
-    .then(res => {
-      res.json()})
-    
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
-    
-    props.history.push('/success')
-  }
+import './BankCard.css';
 
-  // const editBank = (e, bank) => {
-  //   e.preventDefault();
-  //   fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks'+id, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-type':'application/json; charset=UTF-8'
-  //     },
-  //     body: JSON.stringify(bank)
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => console.log(data))
-  //   .catch(err => console.log(err))
-  // }
+const BankCard = (props) => {
+	const { bank } = props;
+
+	const removeBank = (id) => {
+		fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks/' + id, {
+			method: 'DELETE',
+		})
+			.then((res) => {
+				res.json();
+			})
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
+		props.history.push('/success');
+	};
 
 	return (
 		<div className='bankCard container'>
@@ -45,18 +29,15 @@ const BankCard = (props) => {
 					>
 						<div className='justify-content-between'>
 							<h4>{bank.name}</h4>
-							<p>{bank.interestRate}% річних</p>
+							<p>{bank.interestRate}%</p>
 						</div>
-						<div
-							className='remove-button'
-							onClick={() => removeBank(bank.id)}
-						>
+						<div className='remove-button' onClick={() => removeBank(bank.id)}>
 							Remove bank
 						</div>
 					</Accordion.Toggle>
 					<Accordion.Collapse eventKey={bank}>
 						<Card.Body>
-							<p className='text-justify'>{`Цей банк готовий позичити Вам ${bank.maximumLoan} грн під ${bank.interestRate}% за умови першого внеску ${bank.downPaymentPercent}% від суми на ${bank.loanTerm} місяців.`}</p>
+							<p className='text-justify'>{`This bank may lend you ${bank.maximumLoan} conventional units with Interest of ${bank.interestRate}% for ${bank.loanTerm} month. Your Down Payment must be ${bank.downPaymentPercent}% of the value.`}</p>
 						</Card.Body>
 					</Accordion.Collapse>
 				</Card>

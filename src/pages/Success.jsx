@@ -1,4 +1,3 @@
-
 export const Success = () => {
   return (
     <div>
