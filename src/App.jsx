@@ -7,6 +7,8 @@ import './App.css'
 import BanksPage from './pages/BanksPage/BanksPage'
 import CalcPage from './pages/CalcPage/CalcPage'
 import AddPage from './pages/AddPage/AddPage';
+import MyNavbar from './components/MyNavbar/MyNavbar';
+import { Success } from './pages/Success';
 
 class App extends React.Component {
   constructor() {
@@ -33,6 +35,7 @@ class App extends React.Component {
     const {banks} = this.state
     return (
       <div className="App">
+        <MyNavbar/>
         <Switch>
           <Route 
             exact 
@@ -42,11 +45,18 @@ class App extends React.Component {
           <Route 
             exact 
             path="/calc" 
-            render={()=><CalcPage banks={banks}/>}          />
+            render={()=><CalcPage banks={banks}/>}          
+          />
           <Route 
             exact 
             path="/add" 
-            render={()=><AddPage banks={banks}/>}          />
+            render={()=><AddPage banks={banks}/>}          
+          />
+          <Route 
+            exact 
+            path="/success" 
+            render={()=><Success/>}          
+          />
         </Switch>
       </div>
     )

@@ -1,59 +1,94 @@
-import {useState} from 'react'
-import Select from 'react-select'
-import { FormControl } from 'react-bootstrap';
+import { useState } from 'react';
+import Select from 'react-select';
 
-import countForTable from '../../func/calcFunction'
+import countForTable from '../../func/calcFunction';
+
+const CalcPage = ({ banks }) => {
+	const [currentBank, setCurrentBank] = useState({});
+	const [totalCost, setTotalCost] = useState('');
+	const [downPayment, setDownPayment] = useState(0);
+	const [monthQuantity, setMonthQuantity] = useState(1);
+	
+	const getTotalMonthlyPayment = () => {
+		let res = countForTable(
+			totalCost,
+			downPayment,
+			currentBank.interestRate,
+			monthQuantity
+		)
+		if (res.length === 0) return 0
+		else return res[0].totalPayment.toFixed(2)
+	}
+
+	const totalMonthlyPayment = getTotalMonthlyPayment()
 
 
+	return (
+		<div className='calcPage'>
+			<form 
+				className='form'
+			>
+				<label>Select your bank or start typing..</label>
+				<Select
+					className='select'   
+					options={banks}
+					onChange={(e) => {
+						setCurrentBank(e);
+					}}
+				/>
 
-const CalcPage = ({banks}) => {
-  const [currentBank, setCurrentBank] = useState({})
-  const [totalCost, setTotalCost] = useState(0)
-  const [downPayment, setDownPayment] = useState(0)
-  const [monthQuantity, setMonthQuantity] = useState(1)
+				<label htmlFor='totalCost'>
+					What is total cost of your future home?
+				</label>
+				<input
+					onChange={(e) => {
+						setTotalCost(+e.target.value);
+					}}
+					id='totalCost'
+					name='totalCost'
+					type='text'
+					placeholder='65000'
+					required={true}
+				/>
 
-  const totalPayment = (countForTable(totalCost, downPayment, currentBank.interestRate, monthQuantity)[0].totalPayment).toFixed(2)
-  return (
-    <div className="calcPage">
-      {
-        !isNaN(totalPayment)
-        ? <strong><p>Your monthly mortgage payment will be {totalPayment} conventional units</p></strong>
-        : <p>Input your data into next fields:</p>
-      }
-      <p>What is total cost of your future home?</p>
-      <FormControl
-        onChange={(e) => {setTotalCost(+(e.target.value))}}
-        placeholder="65000"
-        aria-label='Small'
-        aria-describedby='inputGroup-sizing-sm'
-      />
-      
-      <p>What is your down payment?</p>
-      <FormControl
-        onChange={(e) => {setDownPayment(+(e.target.value))}}
-        placeholder="20000"
-        aria-label='Small'
-        aria-describedby='inputGroup-sizing-sm'
-      />
-      <p>What is going to be a loan term (in month)?</p>
-      <FormControl
-        onChange={(e) => {setMonthQuantity(+(e.target.value))}}
-        placeholder="3"
-        aria-label='Small'
-        aria-describedby='inputGroup-sizing-sm'
-      />
-      <p>Select your bank or start typing..</p>
-      <Select 
-        options={banks} 
-        onChange={(e) => {
-          setCurrentBank(e)
-        }}/>
-      <p>Your bank's interest rate is {currentBank.interestRate}%</p>
-      
-      
-      
-    </div>
-  );
-}
+				<label htmlFor='downPayment'>What is your down payment?</label>
+				<input
+					onChange={(e) => {
+						setDownPayment(+e.target.value);
+					}}
+					id='downPayment'
+					name='downPayment'
+					type='text'
+					placeholder='20000'
+					required={true}
+				/>
 
-export default CalcPage
+				<label htmlFor='monthQuantity'>
+					What is going to be a loan term (in month)?
+				</label>
+				<input
+					onChange={(e) => {
+						setMonthQuantity(+e.target.value);
+					}}
+					id='monthQuantity'
+					name='monthQuantity'
+					type='text'
+					placeholder='12'
+					required={true}
+				/>
+			</form>
+			{(totalMonthlyPayment !== 0) ? (
+				<input
+					type='submit'
+					disabled
+					value={`your total mothly payment will be ${totalMonthlyPayment}`}
+				/>
+				
+			) : (
+				<input type='err' value='input correct data' disabled />
+			)}
+		</div>
+	);
+};
+
+export default CalcPage;

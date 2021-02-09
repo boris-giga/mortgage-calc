@@ -1,14 +1,5 @@
 import React from 'react';
-// import { FormControl, FormLabel, InputGroup } from 'react-bootstrap';
-
-const test = {
-  name: 'a',
-  interestRate: 0,
-  maximumLoan: 0,
-  downPaymentPercent: 0,
-  loanTerm: 1,
-}
-
+import { withRouter } from 'react-router-dom';
 
 class AddPage extends React.Component {
 	constructor() {
@@ -30,7 +21,6 @@ class AddPage extends React.Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-
 		fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks', {
       method: 'POST',
       body: JSON.stringify({
@@ -44,44 +34,79 @@ class AddPage extends React.Component {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin' : '*'
 			}
-      // mode: 'no-cors'
 		});
-		console.log(this.state);
+		// console.log(this.state);
 		this.setState({
 			name: '',
-			interestRate: 0,
-			maximumLoan: 0,
-			downPaymentPercent: 0,
-			loanTerm: 1,
-		});
+			interestRate: null,
+			maximumLoan: null,
+			downPaymentPercent: null,
+			loanTerm: null,
+    });
+    this.props.history.push('/')
 	}
 
 	render() {
+    console.log(this.props)
 		return (
-			<form onSubmit={this.onSubmit} className='formAdd'>
-				<label htmlFor='name'>Enter bank</label>
-				<input onChange={this.onChange} id='name' name='name' type='text' />
+      <div className="addPage">
+      
+			<form onSubmit={this.onSubmit} className='formAdd form'>
+				<label htmlFor='name'>Enter bank:</label>
+        <input 
+          onChange={this.onChange} 
+          id='name' 
+          name='name' 
+          type='text' 
+          placeholder='someBankName'
+          required={true}  
+        />
 
-				<label htmlFor='interestRate'>Interest rate</label>
-				<input onChange={this.onChange} id='interestRate' name='interestRate' type='number' />
+				<label htmlFor='interestRate'>Interest rate (in %):</label>
+        <input 
+          onChange={this.onChange} 
+          id='interestRate' 
+          name='interestRate' 
+          type='number' 
+          placeholder='5'
+          required={true}  
+        />
 
-				<label htmlFor='maximumLoan'>maximumLoan</label>
-				<input onChange={this.onChange} id='maximumLoan' name='maximumLoan' type='number' />
+				<label htmlFor='maximumLoan'>Maximum loan:</label>
+        <input 
+          onChange={this.onChange} 
+          id='maximumLoan' 
+          name='maximumLoan' 
+          type='number' 
+          placeholder='5000000'
+          required={true}  
+        />
 
-				<label htmlFor='downPaymentPercent'>downPaymentPercent</label>
+				<label htmlFor='downPaymentPercent'>Down Payment (in %):</label>
         <input
           onChange={this.onChange}
 					id='downPaymentPercent'
 					name='downPaymentPercent'
-					type='number'
+          type='number'
+          placeholder='20'
+          required={true}  
 				/>
 
-				<label htmlFor='loanTerm'>loanTerm</label>
-				<input onChange={this.onChange} id='loanTerm' name='loanTerm' type='number' />
-				<input type='submit' value='submit' />
-			</form>
+				<label htmlFor='loanTerm'>Loan term (in month):</label>
+        <input 
+          onChange={this.onChange} 
+          id='loanTerm' 
+          name='loanTerm' 
+          type='number' 
+          placeholder='240'  
+          required={true}  
+        />
+        
+				<input type='submit' value='ADD BANK' />
+      </form>
+      </div>
 		);
 	}
 }
 
-export default AddPage;
+export default withRouter(AddPage);
