@@ -13,7 +13,6 @@ class AddPage extends React.Component {
 		};
 	}
 	onChange = (e) => {
-    console.log(e.target.name);
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
@@ -47,7 +46,6 @@ class AddPage extends React.Component {
 	}
 
 	render() {
-    console.log(this.props)
 		return (
       <div className="addPage">
       

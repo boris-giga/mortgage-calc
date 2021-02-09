@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Table from '../../components/Table/Table';
 import Select from 'react-select';
 
 import countForTable from '../../func/calcFunction';
@@ -22,8 +23,20 @@ const CalcPage = ({ banks }) => {
 
 	const totalMonthlyPayment = getTotalMonthlyPayment()
 
+	const getResForTable = () => {
+		let res = countForTable(
+			totalCost,
+			downPayment,
+			currentBank.interestRate,
+			monthQuantity
+		)
+		return res
+	}
+
+	const tableData = getResForTable()
 
 	return (
+		
 		<div className='calcPage'>
 			<form 
 				className='form'
@@ -77,7 +90,7 @@ const CalcPage = ({ banks }) => {
 					required={true}
 				/>
 			</form>
-			{(totalMonthlyPayment !== 0) ? (
+			{(totalMonthlyPayment !== 0 && !isNaN(totalMonthlyPayment)) ? (
 				<input
 					type='submit'
 					disabled
@@ -87,6 +100,7 @@ const CalcPage = ({ banks }) => {
 			) : (
 				<input type='err' value='input correct data' disabled />
 			)}
+			<Table data={tableData}/>
 		</div>
 	);
 };

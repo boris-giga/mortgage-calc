@@ -5,17 +5,13 @@ import { withRouter } from 'react-router-dom';
 
 const BankCard = (props) => {
   const {bank} = props
-  console.log(props);
-
  
-  const removeBank = async (id) => {
-    console.log(id);
+  const removeBank = (id) => {
     
     fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks/'+id, {
       method: 'DELETE'
     })
     .then(res => {
-      console.log(res);
       res.json()})
     
     .then(data => console.log(data))
