@@ -8,11 +8,12 @@ import BanksPage from './pages/BanksPage/BanksPage';
 import CalcPage from './pages/CalcPage/CalcPage';
 import AddPage from './pages/AddPage/AddPage';
 import MyNavbar from './components/MyNavbar/MyNavbar';
-import { Success } from './pages/Success';
+import EditPage from './pages/EditPage/EditPage';
 
 const App = () => {
 	
 	const [banks, setBanks] = useState([])
+	
 
   useEffect( () => {
     axios
@@ -36,7 +37,7 @@ const App = () => {
 					<Route exact path='/' render={() => <BanksPage banks={banks}/>} />
 					<Route exact path='/calc' render={() => <CalcPage banks={banks} />} />
 					<Route exact path='/add' render={() => <AddPage/>} />
-					<Route exact path='/success' render={() => <Success />} />
+					<Route exact path='/edit/:id' render={() => <EditPage banks={banks}/>} />
 				</Switch>
 			</div>
 		);

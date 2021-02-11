@@ -14,7 +14,7 @@ const BanksPage = ({banks}) => {
 					</strong>
 				</p>
         <p>
-          Check out the bank rates by clicking on it!
+          Check out the bank rates!
         </p>
 			</div>
 			{banks.map(bank => <BankCard key={bank.id} bank={bank} />)}

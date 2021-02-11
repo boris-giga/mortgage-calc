@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Table from '../../components/Table/Table';
 import Select from 'react-select';
+
+import Table from '../../components/Table/Table';
 
 import countForTable from '../../func/calcFunction';
 
@@ -89,7 +90,7 @@ const CalcPage = ({ banks }) => {
 			</form>
 			{totalMonthlyPayment !== 0 && !isNaN(totalMonthlyPayment) ? (
 				<input
-					type='submit'
+					type='click'
 					disabled
 					value={`your total mothly payment will be ${totalMonthlyPayment}`}
 				/>

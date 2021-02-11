@@ -11,7 +11,6 @@ const countForTable = (totalCost=0, downPayment=0, interestRate=0, monthQuantity
     let mainPart = totalPayment - interestPayment
     loanBalance -= mainPart
     let equity = totalCost - loanBalance
-    // num.toFixed(2)
     res = [...res, 
       {
         'month': i,

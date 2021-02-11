@@ -1,7 +1,4 @@
-import { Accordion, Card } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-
-import './BankCard.css';
 
 const BankCard = (props) => {
 	const { bank } = props;
@@ -16,33 +13,30 @@ const BankCard = (props) => {
 			})
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-		
 	};
 
+	const editBank = (id) => {
+		props.history.push(`/edit/${id}`)
+	}
+
 	return (
-		<div className='bankCard container'>
-			<Accordion>
-				<Card>
-					<Accordion.Toggle
-						as={Card.Header}
-						eventKey={bank}
-						className='d-flex justify-content-between'
-					>
-						<div className='justify-content-between'>
-							<h4>{bank.name}</h4>
-							<p>{bank.interestRate}%</p>
-						</div>
-						<div className='remove-button' onClick={() => removeBank(bank.id)}>
-							Remove bank
-						</div>
-					</Accordion.Toggle>
-					<Accordion.Collapse eventKey={bank}>
-						<Card.Body>
-							<p className='text-justify'>{`This bank may lend you ${bank.maximumLoan} conventional units with Interest of ${bank.interestRate}% for ${bank.loanTerm} month. Your Down Payment must be ${bank.downPaymentPercent}% of the value.`}</p>
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-			</Accordion>
+		<div className='bankCard'>
+			<div className='info'>
+				<div className=''>
+					<h4>{bank.name}</h4>
+					
+					<p className='text-justify'>{`This bank may lend you ${bank.maximumLoan} conventional units with Interest of ${bank.interestRate}% for ${bank.loanTerm} month. Your Down Payment must be ${bank.downPaymentPercent}% of the value.`}</p>
+				</div>
+			</div>
+			<div className="buttons">
+				<button className='removeButton' onClick={() => removeBank(bank.id)}>
+					Remove bank
+				</button>
+				<button className='editButton' onClick={() => editBank(bank.id)}>
+					Edit bank
+				</button>
+			</div>
+			
 		</div>
 	);
 };

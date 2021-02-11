@@ -1,10 +1,49 @@
 .App {
   text-align: inherit;
+  
 }
 
 a {
   text-decoration: none;
   color:whitesmoke!important;
+}
+
+.bankCard {
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.info {
+  padding: 20px;
+}
+
+.info h4 {
+  text-transform: capitalize;
+  text-decoration-line: underline;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+  justify-content: center;
+}
+
+.removeButton {
+  margin-bottom: 10px;
+  background-color: rgba(253, 93, 0, 0.801);
+  color: #f2f2f2;
+}
+.editButton {
+  background-color: rgba(0, 131, 253, 0.801);
+  color: #f2f2f2;
 }
 
 .form {

@@ -10,14 +10,17 @@ const AddPage = (props) => {
   const [downPaymentPercent, setDownPaymentPercent] = useState(0)
   const [loanTerm, setLoanTerm] = useState(1)
 
-  const submitBank = () => {
-    axios.post('https://quiet-inlet-20067.herokuapp.com/api/v1/banks', {
-      name,
-      interestRate,
-      maximumLoan,
-      downPaymentPercent,
-      loanTerm
-    })
+	const bankData = {
+		name,
+		interestRate,
+		maximumLoan,
+		downPaymentPercent,
+		loanTerm
+	}
+
+	const addBank = () => {
+		console.log('add');
+    axios.post('https://quiet-inlet-20067.herokuapp.com/api/v1/banks', bankData)
     .then(() => props.history.push('/'))
   }
 
@@ -74,7 +77,7 @@ const AddPage = (props) => {
 						required={true}
 					/>
 
-					<input type='click' onClick={submitBank} value='ADD BANK' />
+					<input type='click' onClick={addBank} defaultValue='ADD BANK' />
 				</form>
 			</div>
 		);

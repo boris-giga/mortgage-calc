@@ -1,7 +1,6 @@
 import { Navbar } from "react-bootstrap"
 import { Link } from 'react-router-dom';
 
-
 const MyNavbar = () => {
   return (
     <Navbar bg="dark" variant="light" sticky="top">
