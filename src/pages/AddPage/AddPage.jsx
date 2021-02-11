@@ -1,56 +1,32 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react'
+import axios from 'axios'
+import {withRouter} from 'react-router-dom';
 
-class AddPage extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			name: '',
-			interestRate: 0,
-			maximumLoan: 0,
-			downPaymentPercent: 0,
-			loanTerm: 1,
-		};
-	}
-	onChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
-	};
+const AddPage = (props) => {
 
-	onSubmit = (e) => {
-		e.preventDefault();
-		fetch('https://quiet-inlet-20067.herokuapp.com/api/v1/banks', {
-			method: 'POST',
-			body: JSON.stringify({
-				name: this.state.name,
-				interestRate: parseFloat(this.state.interestRate),
-				maximumLoan: parseInt(this.state.maximumLoan, 10),
-				downPaymentPercent: parseInt(this.state.downPaymentPercent, 10),
-				loanTerm: parseInt(this.state.loanTerm, 10),
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*',
-			},
-		});
-		this.setState({
-			name: '',
-			interestRate: null,
-			maximumLoan: null,
-			downPaymentPercent: null,
-			loanTerm: null,
-		});
-		this.props.history.push('/');
-	};
+  const [name, setName] = useState('')
+  const [interestRate, setInterestRate] = useState(0)
+  const [maximumLoan, setMaximumLoan] = useState(0)
+  const [downPaymentPercent, setDownPaymentPercent] = useState(0)
+  const [loanTerm, setLoanTerm] = useState(1)
 
-	render() {
-		return (
-			<div className='addPage'>
-				<form onSubmit={this.onSubmit} className='formAdd form'>
-					<label htmlFor='name'>Enter bank:</label>
+  const submitBank = () => {
+    axios.post('https://quiet-inlet-20067.herokuapp.com/api/v1/banks', {
+      name,
+      interestRate,
+      maximumLoan,
+      downPaymentPercent,
+      loanTerm
+    })
+    .then(() => props.history.push('/'))
+  }
+
+  return (
+    <div className='addPage'>
+				<form className='formAdd form'>
+					<label >Enter bank:</label>
 					<input
-						onChange={this.onChange}
+            onChange={(e) => setName(e.target.value)}
 						id='name'
 						name='name'
 						type='text'
@@ -58,51 +34,52 @@ class AddPage extends React.Component {
 						required={true}
 					/>
 
-					<label htmlFor='interestRate'>Interest rate (in %):</label>
+					<label >Interest rate (in %):</label>
 					<input
-						onChange={this.onChange}
+            onChange={(e) => setInterestRate(parseFloat(e.target.value))}
 						id='interestRate'
 						name='interestRate'
-						type='number'
+						type='text'
 						placeholder='5'
 						required={true}
 					/>
 
-					<label htmlFor='maximumLoan'>Maximum loan:</label>
+					<label >Maximum loan:</label>
 					<input
-						onChange={this.onChange}
-						id='maximumLoan'
+            onChange={(e) => setMaximumLoan(parseInt(e.target.value))}
+            id='maximumLoan'
 						name='maximumLoan'
-						type='number'
+						type='text'
 						placeholder='5000000'
 						required={true}
 					/>
 
 					<label htmlFor='downPaymentPercent'>Down Payment (in %):</label>
 					<input
-						onChange={this.onChange}
-						id='downPaymentPercent'
+            onChange={(e) => setDownPaymentPercent(parseFloat(e.target.value))}
+            id='downPaymentPercent'
 						name='downPaymentPercent'
-						type='number'
+						type='text'
 						placeholder='20'
 						required={true}
 					/>
 
-					<label htmlFor='loanTerm'>Loan term (in month):</label>
+					<label>Loan term (in month):</label>
 					<input
-						onChange={this.onChange}
-						id='loanTerm'
+            onChange={(e) => setLoanTerm(parseInt(e.target.value))}
+            id='loanTerm'
 						name='loanTerm'
-						type='number'
+						type='text'
 						placeholder='240'
 						required={true}
 					/>
 
-					<input type='submit' value='ADD BANK' />
+					<input type='click' onClick={submitBank} value='ADD BANK' />
 				</form>
 			</div>
 		);
-	}
+  
 }
 
-export default withRouter(AddPage);
+
+export default withRouter(AddPage)

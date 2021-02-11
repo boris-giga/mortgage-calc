@@ -1,8 +1,9 @@
-import BankCard from './../../components/BankCard/BankCard';
+import BankCard from '../../components/BankCard/BankCard';
 
 import './BanksPage.css';
 
-const BanksPage = ({ banks }) => {
+const BanksPage = ({banks}) => {
+
 	return (
 		<div className='banksPage'>
 			<div className='text'>
@@ -16,11 +17,10 @@ const BanksPage = ({ banks }) => {
           Check out the bank rates by clicking on it!
         </p>
 			</div>
-			{banks.map((bank) => (
-				<BankCard key={bank.id} bank={bank} />
-			))}
+			{banks.map(bank => <BankCard key={bank.id} bank={bank} />)}
 		</div>
-	);
-};
+	)
+}
+
 
 export default BanksPage;

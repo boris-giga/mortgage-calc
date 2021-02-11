@@ -23,7 +23,8 @@ a {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=click] {
+  text-align: center;
   width: 100%;
   background-color: #4CAF50;
   color: white;

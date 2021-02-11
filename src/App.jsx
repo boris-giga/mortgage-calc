@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,16 +10,12 @@ import AddPage from './pages/AddPage/AddPage';
 import MyNavbar from './components/MyNavbar/MyNavbar';
 import { Success } from './pages/Success';
 
-class App extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			banks: [],
-		};
-	}
+const App = () => {
+	
+	const [banks, setBanks] = useState([])
 
-	componentDidMount() {
-		axios
+  useEffect( () => {
+    axios
 			.get(`https://quiet-inlet-20067.herokuapp.com/api/v1/banks`)
 			.then((response) => {
 				const options = response.data.map((bank) => {
@@ -29,24 +25,22 @@ class App extends React.Component {
 						label: bank.name,
 					};
 				});
-				this.setState({ banks: options });
+				setBanks(options);
 			});
-	}
-
-	render() {
-		const { banks } = this.state;
+  }, [banks] )
+	
 		return (
 			<div className='App'>
 				<MyNavbar />
 				<Switch>
-					<Route exact path='/' render={() => <BanksPage banks={banks} />} />
+					<Route exact path='/' render={() => <BanksPage banks={banks}/>} />
 					<Route exact path='/calc' render={() => <CalcPage banks={banks} />} />
-					<Route exact path='/add' render={() => <AddPage banks={banks} />} />
+					<Route exact path='/add' render={() => <AddPage/>} />
 					<Route exact path='/success' render={() => <Success />} />
 				</Switch>
 			</div>
 		);
 	}
-}
+
 
 export default App;
