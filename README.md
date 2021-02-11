@@ -5,12 +5,12 @@ You can see application live at link https://react-mortgage-calc.herokuapp.com/c
     * fetches data from server with mySQL db (deployed on Heroku, github link https://github.com/boris-giga/mortgage-backend , docs in README.md)
     * removes bank from db by clicking on Remove bank
   Fixes needed:
-    * you can see changes after refreshing page
+    * (fixed) you can see changes after refreshing page
 - Add bank Page:
   Features applied:
     * adds bank to db after filling form and clicking on ADD BANK button
   Fixes needed:
-    * you can see changes after refreshing page
+    * (fixed) you can see changes after refreshing page
     * additional validation
 - Calculate page
   Features applied:
