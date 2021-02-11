@@ -10,14 +10,14 @@ const EditPage = (props) => {
   const [newName, setNewName] = useState(currentBank.name)
   const [newInterestRate, setNewInterestRate] = useState(currentBank.interestRate)
   const [newMaximumLoan, setNewMaximumLoan] = useState(currentBank.maximumLoan)
-  const [newDownPaymentPercent, setNewDownPaymentPercent] = useState(currentBank.downPayment)
+  const [newDownPaymentPercent, setNewDownPaymentPercent] = useState(currentBank.downPaymentPercent)
   const [newLoanTerm, setNewLoanTerm] = useState(currentBank.loanTerm)
 
   const newBankData = {
 		name: newName,
 		interestRate: newInterestRate,
 		maximumLoan: newMaximumLoan,
-		downPayment: newDownPaymentPercent,
+		downPaymentPercent: newDownPaymentPercent,
 		loanTerm: newLoanTerm
 	}
 
